@@ -8,5 +8,6 @@ router.get("/",Productcontroller.getALLProduct)
 router.get("/:productId",Productcontroller.getSingleProduct)
 router.put("/:productId",Productcontroller.updateProduct)
 
+
  
 export const productRouter = router
