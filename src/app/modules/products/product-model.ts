@@ -14,7 +14,7 @@ const ProductSchema = new Schema<TProduct>({
     }],
     inventory: {
         quantity: { type: Number, required: true },
-        inStock: { type: Boolean, required: true },
+        inStock: { type: Boolean, required:true ,default:true },
     },
 })
 const ProductModel = model<TProduct>('Product', ProductSchema)
