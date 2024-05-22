@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { productServise } from "./product-servise";
 import productValidationSchema from "./product-validation";
+import orderValidationSchema from "../orders/order.joi-validation";
+import ProductModel from "./product-model";
 
 // create product
 const createProduct = async (req: Request, res:Response) => {
@@ -31,11 +33,11 @@ const createProduct = async (req: Request, res:Response) => {
         })
     }
 }
-// get ALl Product
+
 const getALLProduct = async (req:Request, res:Response) => {
         try{
             const { searchTerm } = req.query;
-            console.log(searchTerm);
+     
             
             let result 
             if(searchTerm){
@@ -113,7 +115,24 @@ const updateProduct = async (req:Request, res:Response) => {
 
 }
    
+const deleteProduct = async (req:Request, res:Response) => {
 
+    try{
+        const {productId} = req.params
+        const result = await productServise.deleteProductDB(productId)
+        res.status(200).json({
+            success: true,
+            message: 'Product updated successfully',
+            data: result
+        })
+    }catch(err){
+        res.status(500).json({
+            success: false,
+            message: 'something is wrong in deleting  ',
+            error: err
+        })
+    }
+}
 
 
 
@@ -121,6 +140,7 @@ export const Productcontroller = {
     createProduct,
     getALLProduct,
     getSingleProduct,
-    updateProduct
-    
+    updateProduct,
+    deleteProduct
+
 }

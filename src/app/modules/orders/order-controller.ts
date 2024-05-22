@@ -46,7 +46,9 @@ const createOrder = async (req: Request, res:Response) => {
         data: result 
     })
     
-     
+ 
+
+
     }catch(err){
         res.status(500).json({
             success: false,
@@ -55,8 +57,40 @@ const createOrder = async (req: Request, res:Response) => {
         })
     }
 }
+   // get order 
+   const getAllOrder = async  (req:Request, res:Response) => {
+    try{
+       const {email} = req.params
+       let result
+       if(email){
+         result = await orderServise.getEmailOnProductDB(email) 
+         res.status(200).json({
+            success: true,
+            message: 'Get Email product find  succesfully !!',
+            data: result 
+        })
+       }else{
+        result = await orderServise.GetAllOrderDB()
+            res.status(200).json({
+            success: true,
+            message: 'Get all Product succesfully !!',
+            data: result 
+        })
+       }
+  
+      
+    }catch(err){
+     res.status(500).json({
+         success: false,
+         message: 'something is wrong ,, get not order ',
+         error: err
+     })
+ }
+}
+
+
 export const ordercontroller = {
-    
+    getAllOrder,
     createOrder
     
 }
