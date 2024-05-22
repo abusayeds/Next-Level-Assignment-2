@@ -22,7 +22,7 @@ const productValidationSchema = Joi.object<TProduct>({
     ).required(),
     inventory: Joi.object({
       quantity: Joi.number().required(),
-      inStock: Joi.boolean().required(),
+      inStock: Joi.boolean().default(true).required(),
     }).required(),
   });
   
