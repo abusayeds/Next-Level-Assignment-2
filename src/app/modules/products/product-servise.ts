@@ -15,10 +15,16 @@ const getAllProductDB = async () => {
     return result
 }
 
-const searchProductDB = async (searchTerm: string) => {
-    const result = await ProductModel.find({
-        name: {$regex: searchTerm, $option: 'i'}
-    })
+const searchProductDB = async (searchTerm ?: string) => {
+    const query = searchTerm ? {
+        $or: [
+          { name: new RegExp(searchTerm, 'i') },
+          { description: new RegExp(searchTerm, 'i') },
+          { category: new RegExp(searchTerm, 'i') }
+        ]
+      } : {};
+      const result = await ProductModel.find(query)
+
     return result
 }
 
@@ -27,9 +33,14 @@ const getSingleProductDB = async (id: string) => {    // get single product
    return result
 }
 
-const updateProductDB = async (id:string, updateData:Partial<TProduct>) => {
+   const updateProductDB = async (id:string, updateData:Partial<TProduct>) => {
    const result = await ProductModel.findByIdAndUpdate(id,updateData,{new:true})    // ptoduct update
   return result
+}
+
+const deleteProductDB = async (id:string) => {
+    const result = await ProductModel.findByIdAndDelete(id)
+    return result
 }
 
 
@@ -39,6 +50,7 @@ export const productServise = {
     getSingleProductDB,
     updateProductDB,
     searchProductDB,
+    deleteProductDB
       
  
 }
