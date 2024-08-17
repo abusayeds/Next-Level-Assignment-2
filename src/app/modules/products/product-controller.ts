@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import { productServise } from "./product-servise";
 import productValidationSchema from "./product-validation";
-import orderValidationSchema from "../orders/order.joi-validation";
-import ProductModel from "./product-model";
+
 
 // create product
 const createProduct = async (req: Request, res:Response) => {
@@ -122,7 +121,7 @@ const deleteProduct = async (req:Request, res:Response) => {
         const result = await productServise.deleteProductDB(productId)
         res.status(200).json({
             success: true,
-            message: 'Product updated successfully',
+            message: 'Product deleted successfully',
             data: result
         })
     }catch(err){

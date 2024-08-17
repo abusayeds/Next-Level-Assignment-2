@@ -1,7 +1,7 @@
 {
     "include": [
         "src"
-    ], // which files to compile
+, "node_modules/app.ts", "node_modules/server.ts"    ], // which files to compile
     "exclude": [
         "node_modules"
     ], // which files to skip
