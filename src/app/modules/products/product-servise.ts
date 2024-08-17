@@ -28,7 +28,7 @@ const searchProductDB = async (searchTerm ?: string) => {
     return result
 }
 
-const getSingleProductDB = async (id: string) => {    // get single product
+const getSingleProductDB = async (id: string) => { 
    const result = await ProductModel.findById(id)
    return result
 }

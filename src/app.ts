@@ -16,7 +16,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use((err:Error, req:Request, res:Response, next:NextFunction) => {
    
-    res.status(500).json({
+    res.status(404).json({
         "success": false,
         "message": "Route not found"
        });

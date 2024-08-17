@@ -58,13 +58,13 @@ const createOrder = async (req: Request, res: Response, next: NextFunction) => {
 const getAllOrder = async (req: Request, res: Response) => {
   try {
     let result;
-    if (req.query) {
+    if (req.query.email) {
       result = await orderServise.getEmailOnProductDB(req.query);
-      console.log(req.query.email);
+     
       
       res.status(200).json({
         success: true,
-        message: "Get Email product find  succesfully !!",
+        message: "Orders fetched successfully for user email!",
         data: result,
       });
     } else {
